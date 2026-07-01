@@ -9,7 +9,7 @@ int main()
 
     scanf("%d", &op);
 
-    if (op < 1 || op > 3)
+    if (op < 1 || op > 4)
     {
         printf("Numero invalido");
         return 0;
