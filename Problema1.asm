@@ -1,53 +1,111 @@
+; Printa um char
+PUTC    MACRO   char
+        PUSH    AX
+        MOV     AL, char
+        MOV     AH, 0Eh
+        INT     10h     
+        POP     AX
+ENDM
+
+IMPRIME_STRING MACRO msg
+        PUSH DX
+        PUSH AX
+        mov dx, offset msg
+        mov ah, 9
+        int 21h
+        POP AX
+        POP DX
+ENDM
+
+PULA_LINHA MACRO
+        putc 0Dh
+        putc 0Ah
+ENDM
+
 org 100h
 
 ; Imprime menu    
-mov dx, offset msg_menu
-mov ah, 9
-int 21h
+IMPRIME_STRING msg_menu
+
+PULA_LINHA
 
 ; Le numero e salva em op
+IMPRIME_STRING msg_op
 CALL scan_num
 MOV op, CX
+
+PULA_LINHA
 
 ; Validacao
 MOV AX, op
 CMP AX, 1
 JL invalido      ; se op < 1, pula
-CMP AX, 3
+CMP AX, 4
 JG invalido      ; se op > 3, pula
 JMP continua     ; op é válido
 
 invalido:
-    MOV DX, offset msg_inv
-    MOV AH, 9
-    INT 21h
+    IMPRIME_STRING msg_inv
     RET          
 
 continua:
 
-; Printa A: e le o valor do teclado
-mov dx, offset msg_a
-mov ah, 9
-int 21h
+; Valor de A
+IMPRIME_STRING msg_a
 CALL scan_num
 MOV a, CX
 
-; Printa B: e le o valor do teclado
-mov dx, offset msg_b
-mov ah, 9
-int 21h
+PULA_LINHA
+
+; Valor de B
+IMPRIME_STRING msg_b
 CALL scan_num
 MOV b, CX
 
-; === 6. calcula ===
-; if op==1 → result = a + b
-; if op==2 → result = a - b
-; if op==3 → result = a * b
-; (deixa como comentário por enquanto)
+MOV AX, a
+MOV BX, b
 
-mov dx, offset msg_res
-mov ah, 9
-int 21h
+; Soma
+CMP op, 1
+JNE subtracao
+ADD AX, BX
+MOV result, AX
+JMP fim_calculo
+
+; Subtracao
+subtracao:
+CMP op, 2
+JNE multiplicacao
+SUB AX, BX
+MOV result, AX
+JMP fim_calculo
+
+; Multiplicacao
+multiplicacao:
+CMP op, 3
+JNE divisao
+MUL BX
+CMP DX, 0
+JNE overflow
+MOV result, AX
+JMP fim_calculo
+
+; Divisao
+divisao:
+MOV DX, 0   
+DIV BX      
+MOV result, AX
+JMP fim_calculo
+
+overflow:
+IMPRIME_STRING msg_overflow
+RET
+
+fim_calculo:
+
+PULA_LINHA
+
+IMPRIME_STRING msg_res
 MOV AX, result
 CALL PRINT_NUM
 
@@ -58,21 +116,13 @@ a      dw 0
 b      dw 0
 result dw 0
 
-; 13 e 10 sao \r e \n
-msg_menu db "1: Soma; 2: Subtracao; 3: Multiplicacao$"
-msg_a    db 13, 10, "A: $"
+msg_menu db "1: Soma; 2: Subtracao; 3: Multiplicacao; 4: Divisao $"
+msg_op   db "Op: $"
+msg_a    db "A: $"
 msg_b    db "B: $"
-msg_res  db 13, 10, "Resultado: $"
+msg_res  db "Resultado: $"
 msg_inv  db "Invalido$"
-
-; Printa um char
-PUTC    MACRO   char
-        PUSH    AX
-        MOV     AL, char
-        MOV     AH, 0Eh
-        INT     10h     
-        POP     AX
-ENDM
+msg_overflow db "Deu overflow! $"
 
 ; Proc para scanear na tela
 SCAN_NUM        PROC    NEAR
