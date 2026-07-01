@@ -31,22 +31,21 @@ PULA_LINHA
 
 ; Le numero e salva em op
 IMPRIME_STRING msg_op
-CALL scan_num
+CALL scan_num 
 MOV op, CX
 
 PULA_LINHA
 
 ; Validacao
-MOV AX, op
-CMP AX, 1
+CMP op, 1
 JL invalido      ; se op < 1, pula
-CMP AX, 4
+CMP op, 4
 JG invalido      ; se op > 3, pula
 JMP continua     ; op é válido
 
 invalido:
     IMPRIME_STRING msg_inv
-    RET          
+    ret          
 
 continua:
 
@@ -74,32 +73,32 @@ JMP fim_calculo
 
 ; Subtracao
 subtracao:
-CMP op, 2
-JNE multiplicacao
-SUB AX, BX
-MOV result, AX
-JMP fim_calculo
+        CMP op, 2
+        JNE multiplicacao
+        SUB AX, BX
+        MOV result, AX
+        JMP fim_calculo
 
 ; Multiplicacao
 multiplicacao:
-CMP op, 3
-JNE divisao
-MUL BX
-CMP DX, 0
-JNE overflow
-MOV result, AX
-JMP fim_calculo
+        CMP op, 3
+        JNE divisao
+        MUL BX
+        CMP DX, 0
+        JNE overflow
+        MOV result, AX
+        JMP fim_calculo
 
 ; Divisao
 divisao:
-MOV DX, 0   
-DIV BX      
-MOV result, AX
-JMP fim_calculo
+        MOV DX, 0   
+        DIV BX      
+        MOV result, AX
+        JMP fim_calculo
 
 overflow:
-IMPRIME_STRING msg_overflow
-RET
+        IMPRIME_STRING msg_overflow
+        ret
 
 fim_calculo:
 
@@ -124,7 +123,7 @@ msg_res  db "Resultado: $"
 msg_inv  db "Invalido$"
 msg_overflow db "Deu overflow! $"
 
-; Proc para scanear na tela
+; Proc para scanear valor da tela
 SCAN_NUM        PROC    NEAR
         PUSH    DX
         PUSH    AX
