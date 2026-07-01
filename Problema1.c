@@ -12,7 +12,7 @@ int main()
     if (op < 1 || op > 4)
     {
         printf("Numero invalido");
-        return 0;
+        return 1;
     }
 
     printf("A: ");
@@ -26,4 +26,6 @@ int main()
     if (op == 4) result = a / b;
 
     printf("Resultado: %d", result);
+
+    return 0;
 }
