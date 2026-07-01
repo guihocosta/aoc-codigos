@@ -4,7 +4,8 @@ int main()
 {
     int op, a, b, result;
 
-    printf("1: Soma; 2: Subtracao; 3: Multiplicacao; \nOp: ");
+    printf("1: Soma; 2: Subtracao; 3: Multiplicacao; 4: Divisao \n");
+    printf("Op: ");
 
     scanf("%d", &op);
 
@@ -22,6 +23,7 @@ int main()
     if (op == 1) result = a + b;
     if (op == 2) result = a - b;
     if (op == 3) result = a * b;
+    if (op == 4) result = a / b;
 
-    printf("Resultado: %d \n", result);
+    printf("Resultado: %d", result);
 }
