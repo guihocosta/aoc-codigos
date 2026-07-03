@@ -48,8 +48,7 @@ IMPRIME_STRING msg_pitagorico
 jmp fim
 
 print_nao:
-    cmp DX, 0
-    JNE print_overflow
+    JO print_overflow
     IMPRIME_STRING msg_nao_pitagorico
     JMP fim
 
@@ -70,20 +69,17 @@ msg_nao_pitagorico db "Os numeros nao formam um Trio Pitagorico $"
 ; Usa AX, BX e CX para os catetos e a hipotenusa; retorna em DX
 EH_PITAGORICO PROC
 MUL AX
-CMP DX, 0
-JNE overflow
+JO overflow
 PUSH AX
 
 MOV AX, BX
 MUL AX
-CMP DX, 0
-JNE overflow
+JO overflow
 PUSH AX
 
 MOV AX, CX
 MUL AX
-CMP DX, 0
-JNE overflow
+JO overflow
 PUSH AX
 
 POP CX
@@ -91,7 +87,7 @@ POP BX
 POP AX
 
 ADD AX, BX
-JC overflow
+JC overflow ; Testa a flag CF
 CMP AX, CX
 JNE nao_pitagorico
 MOV DX, 1
