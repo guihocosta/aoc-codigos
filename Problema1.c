@@ -11,7 +11,7 @@ int main()
 
     if (op < 1 || op > 4)
     {
-        printf("Numero invalido");
+        printf("Numero invalido \n");
         return 1;
     }
 
@@ -25,7 +25,7 @@ int main()
     if (op == 3) result = a * b;
     if (op == 4) result = a / b;
 
-    printf("Resultado: %d", result);
+    printf("Resultado: %d \n", result);
 
     return 0;
 }
