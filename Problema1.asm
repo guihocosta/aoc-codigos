@@ -83,15 +83,15 @@ subtracao:
 multiplicacao:
         CMP op, 3
         JNE divisao
-        IMUL BX
+        MUL BX
         JO overflow
         MOV result, AX
         JMP fim_calculo
 
 ; Divisao
 divisao:
-        MOV DX, 0   
-        IDIV BX      
+        MOV DX, 0  
+        DIV BX      
         MOV result, AX
         JMP fim_calculo
 
