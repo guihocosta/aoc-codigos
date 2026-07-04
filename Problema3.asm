@@ -120,6 +120,8 @@ nao_pitagorico:
     MOV DX, 0
     ret
 
+; Procedimentos do arquivo emu8086.inc
+
 ; Proc para scanear valor da tela
 SCAN_NUM        PROC    NEAR
         PUSH    DX

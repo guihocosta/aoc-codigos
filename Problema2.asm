@@ -99,6 +99,8 @@ msg_inv     db "Invalido! O numero deve ser positivo. $"
 msg_termos1 db "Foram gerados $"
 msg_termos2 db " termos$"
 
+; Procedimentos do arquivo emu8086.inc
+
 ; Proc para scanear valor da tela
 SCAN_NUM        PROC    NEAR
         PUSH    DX

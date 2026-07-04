@@ -40,7 +40,7 @@ PULA_LINHA
 CMP op, 1
 JL invalido      ; se op < 1, pula
 CMP op, 4
-JG invalido      ; se op > 3, pula
+JG invalido      ; se op > 4, pula
 JMP continua     ; op é válido
 
 invalido:
@@ -137,6 +137,9 @@ msg_res  db "Resultado: $"
 msg_inv  db "Invalido$"
 msg_inv_positivo db "Invalido! Os numeros devem ser positivos. $"
 msg_overflow db "Deu overflow! $"
+
+
+; Procedimentos do arquivo emu8086.inc
 
 ; Proc para scanear valor da tela
 SCAN_NUM        PROC    NEAR
