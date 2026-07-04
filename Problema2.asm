@@ -53,7 +53,7 @@ enquanto:
 
     ; Printa n na tela
     MOV AX, n
-    CALL PRINT_NUM
+    CALL PRINT_NUM_UNS
 
     PULA_LINHA
 
@@ -81,7 +81,7 @@ eh_impar:
 fim_enquanto:
 
 MOV AX, n
-CALL PRINT_NUM
+CALL PRINT_NUM_UNS
 
 PULA_LINHA
 
@@ -89,7 +89,7 @@ PULA_LINHA
 IMPRIME_STRING msg_termos1
 
 MOV AX, CX
-CALL PRINT_NUM
+CALL PRINT_NUM_UNS
 
 IMPRIME_STRING msg_termos2
 
@@ -216,34 +216,7 @@ not_minus:
 make_minus      DB      ?       ; used as a flag.
 SCAN_NUM        ENDP
 
-; Proc para 'printar' na tela
-PRINT_NUM       PROC    NEAR
-        PUSH    DX
-        PUSH    AX
-
-        CMP     AX, 0
-        JNZ     not_zero
-
-        PUTC    '0'
-        JMP     printed
-
-not_zero:
-        ; the check SIGN of AX,
-        ; make absolute if it's negative:
-        CMP     AX, 0
-        JNS     positive
-        NEG     AX
-
-        PUTC    '-'
-
-positive:
-        CALL    PRINT_NUM_UNS
-printed:
-        POP     AX
-        POP     DX
-        RET
-PRINT_NUM       ENDP
-
+; Print sem sinal
 PRINT_NUM_UNS   PROC    NEAR
         PUSH    AX
         PUSH    BX

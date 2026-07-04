@@ -284,7 +284,7 @@ printed:
         RET
 PRINT_NUM       ENDP
 
-; Printa vários números de AX
+; Print sem sinal
 PRINT_NUM_UNS   PROC    NEAR
         PUSH    AX
         PUSH    BX
