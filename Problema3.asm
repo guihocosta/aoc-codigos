@@ -41,14 +41,30 @@ CALL scan_num
 
 PULA_LINHA
 
+; Validacao: A, B e C devem ser positivos (maiores que zero)
+CMP AX, 0
+JLE invalido_positivo
+CMP BX, 0
+JLE invalido_positivo
+CMP CX, 0
+JLE invalido_positivo
+JMP positivo_ok
+
+invalido_positivo:
+    IMPRIME_STRING msg_inv_positivo
+    ret
+
+positivo_ok:
+
 CALL EH_PITAGORICO
+CMP DX, 2
+JE print_overflow
 CMP DX, 1
 JNE print_nao
 IMPRIME_STRING msg_pitagorico
 jmp fim
 
 print_nao:
-    JO print_overflow
     IMPRIME_STRING msg_nao_pitagorico
     JMP fim
 
@@ -57,8 +73,9 @@ print_overflow:
     JMP fim
 
 fim:
-    ret 
+    ret
 
+msg_inv_positivo db "Invalido! Os numeros devem ser positivos. $"
 msg_a    db "A: $"
 msg_b    db "B: $"
 msg_c    db "C: $"

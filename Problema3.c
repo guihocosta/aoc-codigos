@@ -1,21 +1,27 @@
 #include <stdio.h>
 
-int ehPitagorico(int A, int B, int C)
+int ehPitagorico(int a, int b, int c)
 {
-    return C * C == (A * A) + (B * B);
+    return c * c == (a * a) + (b * b);
 }
 
 int main()
 {
-    int A, B, C;
+    int a, b, c;
     printf("Informe A: ");
-    scanf("%d", &A);
+    scanf("%d", &a);
     printf("Informe B: ");
-    scanf("%d", &B);
+    scanf("%d", &b);
     printf("Informe C: ");
-    scanf("%d", &C);
+    scanf("%d", &c);
 
-    if (ehPitagorico(A, B, C))
+    if (a <=0 || b <= 0 || c <= 0)
+    {
+        printf("Invalido! O numero deve ser positivo. \n");
+        return 1;
+    }
+
+    if (ehPitagorico(a, b, c))
         printf("Os numeros formam um Trio Pitagorico \n");
     else
         printf("Os numeros nao formam um Trio Pitagorico \n");
