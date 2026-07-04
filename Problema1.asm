@@ -136,7 +136,7 @@ msg_op   db "Op: $"
 msg_a    db "A: $"
 msg_b    db "B: $"
 msg_res  db "Resultado: $"
-msg_inv  db "Invalido$"
+msg_inv  db "Numero invalido $"
 msg_inv_positivo db "Invalido! Os numeros devem ser positivos. $"
 msg_overflow db "Deu overflow! $"
 

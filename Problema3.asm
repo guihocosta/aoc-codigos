@@ -86,29 +86,30 @@ msg_overflow db "Deu overflow! $"
 msg_pitagorico db "Os numeros formam um Trio Pitagorico $"
 msg_nao_pitagorico db "Os numeros nao formam um Trio Pitagorico $"
 
+quadA   dw 0
+quadB   dw 0
+quadC   dw 0
+
 ; Usa AX, BX e CX para os catetos e a hipotenusa; retorna em DX
 EH_PITAGORICO PROC
 MUL AX
 JO overflow
-PUSH AX
+MOV quadA, AX
 
 MOV AX, BX
 MUL AX
 JO overflow
-PUSH AX
+MOV quadB, AX
 
 MOV AX, CX
 MUL AX
 JO overflow
-PUSH AX
+MOV quadC, AX
 
-POP CX
-POP BX
-POP AX
-
-ADD AX, BX
+MOV AX, quadA
+ADD AX, quadB
 JC overflow ; Testa a flag CF
-CMP AX, CX
+CMP AX, quadC
 JNE nao_pitagorico
 MOV DX, 1
 ret 

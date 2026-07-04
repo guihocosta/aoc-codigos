@@ -17,7 +17,7 @@ int main()
 
     if (a <=0 || b <= 0 || c <= 0)
     {
-        printf("Invalido! O numero deve ser positivo. \n");
+        printf("Invalido! Os numeros devem ser positivos. \n");
         return 1;
     }
 
