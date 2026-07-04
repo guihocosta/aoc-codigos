@@ -1,3 +1,5 @@
+; Macros (alguns do .inc, outras criadas a partir das atividades praticas)
+
 ; Printa um char
 PUTC    MACRO   char
         PUSH    AX
@@ -24,6 +26,7 @@ ENDM
 
 org 100h
 
+; Impressoes de A: ; B: ; C: 
 IMPRIME_STRING msg_a
 CALL scan_num
 MOV AX, CX
@@ -110,7 +113,6 @@ JNE nao_pitagorico
 MOV DX, 1
 ret 
 EH_PITAGORICO ENDP
-
 
 overflow:
         MOV DX, 2

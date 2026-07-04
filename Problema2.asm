@@ -1,3 +1,5 @@
+; Macros (alguns do .inc, outras criadas a partir das atividades praticas)
+
 ; Printa um char
 PUTC    MACRO   char
         PUSH    AX
@@ -24,10 +26,9 @@ ENDM
 
 org 100h
 
-; Mensagem do N: 
+; Mensagem do 'N: '
 IMPRIME_STRING msg_n
 
-; Le o numero e guarda em CX
 CALL SCAN_NUM
 MOV n, CX
 
@@ -66,7 +67,7 @@ enquanto:
     CMP DX, 0 ; Resto fica em DX
     JNE eh_impar
 
-    MOV n, AX   
+    MOV n, AX ; n / 2 ja estava em AX
     JMP enquanto
 
 eh_impar:
@@ -84,6 +85,7 @@ CALL PRINT_NUM
 
 PULA_LINHA
 
+; Impressao conforme a especificacao
 IMPRIME_STRING msg_termos1
 
 MOV AX, CX

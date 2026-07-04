@@ -1,3 +1,5 @@
+; Macros (alguns do .inc, outras criadas a partir das atividades praticas)
+
 ; Printa um char
 PUTC    MACRO   char
         PUSH    AX
@@ -31,7 +33,7 @@ PULA_LINHA
 
 ; Le numero e salva em op
 IMPRIME_STRING msg_op
-CALL scan_num 
+CALL scan_num ; Salva conteudo em CX
 MOV op, CX
 
 PULA_LINHA
@@ -41,7 +43,7 @@ CMP op, 1
 JL invalido      ; se op < 1, pula
 CMP op, 4
 JG invalido      ; se op > 4, pula
-JMP continua     ; op é válido
+JMP continua    
 
 invalido:
     IMPRIME_STRING msg_inv
@@ -80,8 +82,8 @@ MOV AX, a
 MOV BX, b
 
 ; Soma
-CMP op, 1
-JNE subtracao
+CMP op, 1 ; 
+JNE subtracao ; 
 ADD AX, BX
 MOV result, AX
 JMP fim_calculo
@@ -106,7 +108,7 @@ multiplicacao:
 ; Divisao
 divisao:
         MOV DX, 0  
-        DIV BX      
+        DIV BX 
         MOV result, AX
         JMP fim_calculo
 
@@ -120,7 +122,7 @@ PULA_LINHA
 
 IMPRIME_STRING msg_res
 MOV AX, result
-CALL PRINT_NUM
+CALL PRINT_NUM ; imprime o conteudo de AX
 
 ret
 
