@@ -20,6 +20,12 @@ int main()
     printf("B: ");
     scanf("%d", &b);
 
+    if (a < 0 || b < 0)
+    {
+        printf("Invalido! Os numeros devem ser positivos. \n");
+        return 1;
+    }
+
     if (op == 1) result = a + b;
     if (op == 2) result = a - b;
     if (op == 3) result = a * b;

@@ -61,6 +61,21 @@ IMPRIME_STRING msg_b
 CALL scan_num
 MOV b, CX
 
+PULA_LINHA
+
+; Validacao: A e B devem ser positivos
+CMP a, 0
+JL invalido_positivo
+CMP b, 0
+JL invalido_positivo
+JMP positivo_ok
+
+invalido_positivo:
+    IMPRIME_STRING msg_inv_positivo
+    ret
+
+positivo_ok:
+
 MOV AX, a
 MOV BX, b
 
@@ -120,6 +135,7 @@ msg_a    db "A: $"
 msg_b    db "B: $"
 msg_res  db "Resultado: $"
 msg_inv  db "Invalido$"
+msg_inv_positivo db "Invalido! Os numeros devem ser positivos. $"
 msg_overflow db "Deu overflow! $"
 
 ; Proc para scanear valor da tela
